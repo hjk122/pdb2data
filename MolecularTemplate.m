@@ -3,43 +3,39 @@
  function new_data = MolecularTemplate(Placed_atoms_num,data,atoms_XYZ)
  fprintf('\t# Template molecules\n');
     %%%% =========== Setting coefficients of the new molecule =============
-    atoms_num = 0;      % atoms number in the new molecule
-    bonds_num = 0;
-    angles_num = 0;
+    atoms_num = 3000;      % atoms number in the new molecule
+    bonds_num = 2000;
+    angles_num = 1000;
     dihedrals_num = 0;
     impropers_num = 0;
-    atom_types = 0;     % atom types in the new molecule
-    bond_types = 0;
-    angle_types = 0;
+    atom_types = 2;     % atom types in the new molecule
+    bond_types = 1;
+    angle_types = 1;
     dihedral_types = 0;
     improper_types = 0;
     % Force field 
-    pair_coeffs = { 'AtomName'  1 2 3 4; % AtomName | epsilon(KJ/mol) | sigma(A) | mass/m | charge/q
-                     }; 
-    bond_coeffs = { 'BondName'  1 2; % BondName
+    % AtomName | epsilon(KJ/mol) | sigma(A) | mass/m | charge/q
+    pair_coeffs = { 'H'  0.0000 0.000 1.008 0.4238 ; % H
+                      'O' 0.1553 3.166 15.9994 -0.8476 ; % O
+                    }; 
+    bond_coeffs = { 'OH'  1000 1.0 ; % O-H
                      };
-    angle_coeffs = { 'AngleName' 1 2  ; % AngleName
+    angle_coeffs = { 'HOH' 100 109.47  ; % H-O-H
                       };
     dihedral_coeffs = { 'DihedralName' 1 2 3 4 5; % DihedralName
                          };
     improper_coeffs = { 'ImproperName' 1 2 3 4 5 6; % ImproperName
                          };
     % Molecular topology
-    Atoms(1:atoms_num,1:3) = [1 1 1;    % atom ID | molecule ID | atoms type
-                              2 1 2;
-                              3 1 2;
-                              4 1 2;
-                              5 1 2;];
-    Bonds(1:bonds_num,1:4) = [1 1 1 2;    % bond ID | bond type | atom1 ID | atom2 ID
-                              2 1 1 3;
-                              3 1 1 4;
-                              4 1 1 5;];
-    Angles(1:angles_num,1:5) = [1 1 2 1 3;    % angle ID | angle type | atom1 ID | atom2 ID | atom3 ID
-                                2 1 2 1 4;
-                                3 1 2 1 5;
-                                4 1 3 1 4;
-                                5 1 3 1 5;
-                                6 1 4 1 5;];
+    % atom ID | molecule ID | atoms type
+    Atoms(1:atoms_num,1:3) = [1 1 1;    
+                                 2 1 1;
+                                 3 1 2;];
+    % bond ID | bond type | atom1 ID | atom2 ID
+    Bonds(1:bonds_num,1:4) = [1 1 1 3;    
+                                 2 1 2 3;];
+    % angle ID | angle type | atom1 ID | atom2 ID | atom3 ID
+    Angles(1:angles_num,1:5) = [1 1 1 3 2;];
     Dihedrals(1:dihedrals_num,1:6) = [1 1 2 1 3 4;    % dihedral ID | dihedral type | atom1 ID | atom2 ID | atom3 ID  | atom4 ID
                                       2 1 2 1 4 5;
                                       3 1 2 1 5 6 ;
